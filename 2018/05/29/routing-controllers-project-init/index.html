@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="routing-controllers," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简介 Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage in Express / Koa using TypeScript and Routing Controllers Framework.  一言以蔽之：可以像开发 Java W">
+<meta name="keywords" content="routing-controllers">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Routing Controllers Framework 项目初始化(使用express.js)">
+<meta property="og:url" content="http://xiaochutian.github.io/2018/05/29/routing-controllers-project-init/index.html">
+<meta property="og:site_name" content="K.I.S.S.">
+<meta property="og:description" content="简介 Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage in Express / Koa using TypeScript and Routing Controllers Framework.  一言以蔽之：可以像开发 Java W">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://xiaochutian.github.io/images/post-routing-controllers-project-init/ts2js.jpg">
+<meta property="og:updated_time" content="2018-05-29T15:54:42.899Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Routing Controllers Framework 项目初始化(使用express.js)">
+<meta name="twitter:description" content="简介 Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage in Express / Koa using TypeScript and Routing Controllers Framework.  一言以蔽之：可以像开发 Java W">
+<meta name="twitter:image" content="http://xiaochutian.github.io/images/post-routing-controllers-project-init/ts2js.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiaochutian.github.io/2018/05/29/routing-controllers-project-init/"/>
+
+
+
+
+
+  <title>Routing Controllers Framework 项目初始化(使用express.js) | K.I.S.S.</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">K.I.S.S.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">好记性不如烂笔头</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xiaochutian.github.io/2018/05/29/routing-controllers-project-init/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiao Chutian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="K.I.S.S.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Routing Controllers Framework 项目初始化(使用express.js)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T20:20:20+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术博客/" itemprop="url" rel="index">
+                    <span itemprop="name">技术博客</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术博客/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术博客/服务器/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/29/routing-controllers-project-init/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/29/routing-controllers-project-init/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
+<p>Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage in Express / Koa using TypeScript and Routing Controllers Framework.</p>
+</blockquote>
+<p>一言以蔽之：可以像开发 <code>Java Web</code> 项目一样，愉快的使用注解进行开发。</p>
+<a id="more"></a>
+<h1 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h1><ul>
+<li>语言环境：<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">node</a></li>
+<li>包管理工具：<a href="https://npm.taobao.org/" target="_blank" rel="noopener">cnpm</a></li>
+<li>集成开发环境：<a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener">idea</a></li>
+</ul>
+<h1 id="基本步骤"><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h1><ol>
+<li>创建项目目录结构</li>
+<li>根据<a href="https://github.com/typestack/routing-controllers#installation" target="_blank" rel="noopener">【官方文档】安装</a> 初始化项目</li>
+<li>运行项目并测试</li>
+<li>初始化git配置并提交（非必须）</li>
+</ol>
+<h1 id="详细步骤"><a href="#详细步骤" class="headerlink" title="详细步骤"></a>详细步骤</h1><h2 id="创建项目目录结构"><a href="#创建项目目录结构" class="headerlink" title="创建项目目录结构"></a>创建项目目录结构</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">mkdir routing-controllers-learn</span><br><span class="line"><span class="built_in">cd</span> routing-controllers-learn</span><br><span class="line">mkdir config</span><br><span class="line">mkdir controller</span><br><span class="line">mkdir service</span><br></pre></td></tr></table></figure>
+<p>创建后的目录结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  routing-controllers-learn <span class="built_in">pwd</span></span><br><span class="line">/Users/xiaochutian/routing-controllers-learn</span><br><span class="line">➜  routing-controllers-learn ll</span><br><span class="line">total 0</span><br><span class="line">drwxr-xr-x 2 xiaochutian 64 May 29 23:50 config</span><br><span class="line">drwxr-xr-x 2 xiaochutian 64 May 29 23:50 controller</span><br><span class="line">drwxr-xr-x 2 xiaochutian 64 May 29 23:50 service</span><br></pre></td></tr></table></figure>
+<h2 id="初始化Routing-Controllers项目"><a href="#初始化Routing-Controllers项目" class="headerlink" title="初始化Routing Controllers项目"></a>初始化Routing Controllers项目</h2><h3 id="安装项目依赖"><a href="#安装项目依赖" class="headerlink" title="安装项目依赖"></a>安装项目依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/routing-controllers-learn</span><br><span class="line">cnpm install routing-controllers --save</span><br><span class="line">cnpm install reflect-metadata --save</span><br><span class="line">cnpm install express body-parser multer --save</span><br><span class="line">cnpm install @types/express @types/body-parser @types/multer --save</span><br></pre></td></tr></table></figure>
+<p>安装后的 <code>package.json</code> 如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"@types/body-parser"</span>: <span class="string">"^1.17.0"</span>,</span><br><span class="line">    <span class="attr">"@types/express"</span>: <span class="string">"^4.11.1"</span>,</span><br><span class="line">    <span class="attr">"@types/multer"</span>: <span class="string">"^1.3.6"</span>,</span><br><span class="line">    <span class="attr">"body-parser"</span>: <span class="string">"^1.18.3"</span>,</span><br><span class="line">    <span class="attr">"express"</span>: <span class="string">"^4.16.3"</span>,</span><br><span class="line">    <span class="attr">"multer"</span>: <span class="string">"^1.3.0"</span>,</span><br><span class="line">    <span class="attr">"reflect-metadata"</span>: <span class="string">"^0.1.12"</span>,</span><br><span class="line">    <span class="attr">"routing-controllers"</span>: <span class="string">"^0.7.7"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="配置tsconfig-json"><a href="#配置tsconfig-json" class="headerlink" title="配置tsconfig.json"></a>配置tsconfig.json</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/routing-controllers-learn</span><br><span class="line">vim tsconfig.json</span><br></pre></td></tr></table></figure>
+<p><code>tsconfig.json</code> 文件内容如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="attr">"module"</span>: <span class="string">"commonjs"</span>,</span><br><span class="line">    <span class="attr">"target"</span>: <span class="string">"es7"</span>,</span><br><span class="line">    <span class="attr">"sourceMap"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"experimentalDecorators"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"emitDecoratorMetadata"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"lib"</span>: [</span><br><span class="line">      <span class="string">"dom"</span>,</span><br><span class="line">      <span class="string">"es7"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"exclude"</span>: [</span><br><span class="line">    <span class="string">"node_modules"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="创建UserController"><a href="#创建UserController" class="headerlink" title="创建UserController"></a>创建UserController</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/routing-controllers-learn/controller</span><br><span class="line">vim UserController.ts</span><br></pre></td></tr></table></figure>
+<p><code>UserController.ts</code> 文件内容如下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;Controller, Param, Body, Get, Post, Put, Delete&#125; <span class="keyword">from</span> <span class="string">"routing-controllers"</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> UserController &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Get</span>(<span class="string">"/users"</span>)</span><br><span class="line">    getAll() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"This action returns all users"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Get</span>(<span class="string">"/users/:id"</span>)</span><br><span class="line">    getOne(<span class="meta">@Param</span>(<span class="string">"id"</span>) id: <span class="built_in">number</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"This action returns user #"</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Post</span>(<span class="string">"/users"</span>)</span><br><span class="line">    post(<span class="meta">@Body</span>() user: <span class="built_in">any</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Saving user..."</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Put</span>(<span class="string">"/users/:id"</span>)</span><br><span class="line">    put(<span class="meta">@Param</span>(<span class="string">"id"</span>) id: <span class="built_in">number</span>, <span class="meta">@Body</span>() user: <span class="built_in">any</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Updating a user..."</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Delete</span>(<span class="string">"/users/:id"</span>)</span><br><span class="line">    remove(<span class="meta">@Param</span>(<span class="string">"id"</span>) id: <span class="built_in">number</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Removing user..."</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="创建App入口"><a href="#创建App入口" class="headerlink" title="创建App入口"></a>创建App入口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/routing-controllers-learn</span><br><span class="line">vim app.ts</span><br></pre></td></tr></table></figure>
+<p><code>app.ts</code> 文件内容如下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"reflect-metadata"</span>; <span class="comment">// this shim is required</span></span><br><span class="line"><span class="keyword">import</span> &#123;createExpressServer&#125; <span class="keyword">from</span> <span class="string">"routing-controllers"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;UserController&#125; <span class="keyword">from</span> <span class="string">"./controller/UserController"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// creates express app, registers all controller routes and returns you express app instance</span></span><br><span class="line"><span class="keyword">const</span> app = createExpressServer(&#123;</span><br><span class="line">    controllers: [UserController] <span class="comment">// we specify controllers we want to use</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// run express application on port 3000</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="IDEA中typescript生成javascript"><a href="#IDEA中typescript生成javascript" class="headerlink" title="IDEA中typescript生成javascript"></a>IDEA中typescript生成javascript</h3><p>用 <code>IDEA</code> 打开项目，打开 <code>app.ts</code> 文件。根据提示，把 <code>IDEA</code> 中，<code>typescript</code> 编译生成 <code>javascript</code> 的设置打开</p>
+<p><img src="/images/post-routing-controllers-project-init/ts2js.jpg" alt="ts2js"></p>
+<blockquote>
+<p>之后，需要研究一下，在服务器上把typescript编译成javascript的配置</p>
+</blockquote>
+<h2 id="运行项目并测试"><a href="#运行项目并测试" class="headerlink" title="运行项目并测试"></a>运行项目并测试</h2><h3 id="安装nodemon"><a href="#安装nodemon" class="headerlink" title="安装nodemon"></a>安装nodemon</h3><p>安装 <code>nodemon</code> 之后，本地文件变更会自动编译部署，调试起来很方便。<br>（这个比起 <code>Java Web</code> 爽太多了）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g nodemon</span><br></pre></td></tr></table></figure>
+<h3 id="本地运行程序"><a href="#本地运行程序" class="headerlink" title="本地运行程序"></a>本地运行程序</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/routing-controllers-learn</span><br><span class="line">nodemon app</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>浏览器打开 <code>http://localhost:3000/users</code> ，则返回 <code>This action returns all users</code><br>浏览器打开 <code>http://localhost:3000/users/1</code> ，则返回 <code>This action returns user #1</code></p>
+<h2 id="初始化git配置并提交"><a href="#初始化git配置并提交" class="headerlink" title="初始化git配置并提交"></a>初始化git配置并提交</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/routing-controllers-learn</span><br><span class="line"><span class="built_in">echo</span> <span class="string">".idea"</span> &gt; .gitignore</span><br><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"routing-controllers项目初始化提交"</span></span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/typestack/routing-controllers#installation" target="_blank" rel="noopener">【官方文档】安装</a><br><a href="https://npm.taobao.org/" target="_blank" rel="noopener">【淘宝】淘宝NPM镜像</a>    </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Xiao Chutian
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://xiaochutian.github.io/2018/05/29/routing-controllers-project-init/" title="Routing Controllers Framework 项目初始化(使用express.js)">http://xiaochutian.github.io/2018/05/29/routing-controllers-project-init/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/routing-controllers/" rel="tag"># routing-controllers</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/04/test-post-2/" rel="next" title="test post 2">
+                <i class="fa fa-chevron-left"></i> test post 2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Xiao Chutian" />
+            
+              <p class="site-author-name" itemprop="name">Xiao Chutian</p>
+              <p class="site-description motion-element" itemprop="description">想找女盆友</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发环境"><span class="nav-number">2.</span> <span class="nav-text">开发环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本步骤"><span class="nav-number">3.</span> <span class="nav-text">基本步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#详细步骤"><span class="nav-number">4.</span> <span class="nav-text">详细步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建项目目录结构"><span class="nav-number">4.1.</span> <span class="nav-text">创建项目目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化Routing-Controllers项目"><span class="nav-number">4.2.</span> <span class="nav-text">初始化Routing Controllers项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装项目依赖"><span class="nav-number">4.2.1.</span> <span class="nav-text">安装项目依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置tsconfig-json"><span class="nav-number">4.2.2.</span> <span class="nav-text">配置tsconfig.json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建UserController"><span class="nav-number">4.2.3.</span> <span class="nav-text">创建UserController</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建App入口"><span class="nav-number">4.2.4.</span> <span class="nav-text">创建App入口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA中typescript生成javascript"><span class="nav-number">4.2.5.</span> <span class="nav-text">IDEA中typescript生成javascript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行项目并测试"><span class="nav-number">4.3.</span> <span class="nav-text">运行项目并测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装nodemon"><span class="nav-number">4.3.1.</span> <span class="nav-text">安装nodemon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地运行程序"><span class="nav-number">4.3.2.</span> <span class="nav-text">本地运行程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">4.3.3.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化git配置并提交"><span class="nav-number">4.4.</span> <span class="nav-text">初始化git配置并提交</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiao Chutian</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://xiaochutian.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://xiaochutian.github.io/2018/05/29/routing-controllers-project-init/';
+          this.page.identifier = '2018/05/29/routing-controllers-project-init/';
+          this.page.title = 'Routing Controllers Framework 项目初始化(使用express.js)';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://xiaochutian.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
