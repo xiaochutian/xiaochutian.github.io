@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="routing-controllers," />
+  <meta name="keywords" content="routing-controllers,CORS," />
 
 
 
@@ -79,18 +79,22 @@
 
 
 
-<meta name="description" content="参考">
-<meta name="keywords" content="routing-controllers">
+<meta name="description" content="概述一般来说，项目开发会前后端分离，用 AJAX 请求来进行交互。这也就一定会涉及到跨源 AJAX 的问题。 说到『跨源』，首先得了解『同源政策（same-origin policy）』。同源政策是浏览器安全的基石。详见：浏览器同源政策及其规避方法     CORS 是跨源资源分享（Cross-Origin Resource Sharing）的缩写。它是 W3C 标准，是跨源 AJAX 请求的根本">
+<meta name="keywords" content="routing-controllers,CORS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Routing Controllers Framework 项目初始化">
-<meta property="og:url" content="http://xiaochutian.github.io/2016/05/29/sample/index.html">
+<meta property="og:title" content="Routing Controllers Framework(二) 解决跨域（CORS）">
+<meta property="og:url" content="http://xiaochutian.github.io/2018/06/01/routing-controllers-framework-cors/index.html">
 <meta property="og:site_name" content="K.I.S.S.">
-<meta property="og:description" content="参考">
+<meta property="og:description" content="概述一般来说，项目开发会前后端分离，用 AJAX 请求来进行交互。这也就一定会涉及到跨源 AJAX 的问题。 说到『跨源』，首先得了解『同源政策（same-origin policy）』。同源政策是浏览器安全的基石。详见：浏览器同源政策及其规避方法     CORS 是跨源资源分享（Cross-Origin Resource Sharing）的缩写。它是 W3C 标准，是跨源 AJAX 请求的根本">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-29T04:33:54.128Z">
+<meta property="og:image" content="http://xiaochutian.github.io/images/routing-controllers-framework-cors/before_cors.jpg">
+<meta property="og:image" content="http://xiaochutian.github.io/images/routing-controllers-framework-cors/after_cors.jpg">
+<meta property="og:image" content="http://xiaochutian.github.io/images/routing-controllers-framework-cors/cannot_find_module_cors.jpg">
+<meta property="og:updated_time" content="2018-06-01T08:05:57.805Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Routing Controllers Framework 项目初始化">
-<meta name="twitter:description" content="参考">
+<meta name="twitter:title" content="Routing Controllers Framework(二) 解决跨域（CORS）">
+<meta name="twitter:description" content="概述一般来说，项目开发会前后端分离，用 AJAX 请求来进行交互。这也就一定会涉及到跨源 AJAX 的问题。 说到『跨源』，首先得了解『同源政策（same-origin policy）』。同源政策是浏览器安全的基石。详见：浏览器同源政策及其规避方法     CORS 是跨源资源分享（Cross-Origin Resource Sharing）的缩写。它是 W3C 标准，是跨源 AJAX 请求的根本">
+<meta name="twitter:image" content="http://xiaochutian.github.io/images/routing-controllers-framework-cors/before_cors.jpg">
 
 
 
@@ -120,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://xiaochutian.github.io/2016/05/29/sample/"/>
+  <link rel="canonical" href="http://xiaochutian.github.io/2018/06/01/routing-controllers-framework-cors/"/>
 
 
 
 
 
-  <title>Routing Controllers Framework 项目初始化 | K.I.S.S.</title>
+  <title>Routing Controllers Framework(二) 解决跨域（CORS） | K.I.S.S.</title>
   
 
 
@@ -253,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xiaochutian.github.io/2016/05/29/sample/">
+    <link itemprop="mainEntityOfPage" href="http://xiaochutian.github.io/2018/06/01/routing-controllers-framework-cors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiao Chutian">
@@ -270,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Routing Controllers Framework 项目初始化</h1>
+          <h1 class="post-title" itemprop="name headline">Routing Controllers Framework(二) 解决跨域（CORS）</h1>
         
 
         <div class="post-meta">
@@ -282,8 +286,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-29T20:20:20+08:00">
-                2016-05-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T22:22:22+08:00">
+                2018-06-01
               </time>
             
 
@@ -345,9 +349,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/05/29/sample/#comments" itemprop="discussionUrl">
+                <a href="/2018/06/01/routing-controllers-framework-cors/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/05/29/sample/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/06/01/routing-controllers-framework-cors/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -375,7 +379,29 @@
       
 
       
-        <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a>    </p>
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>一般来说，项目开发会前后端分离，用 <code>AJAX</code> 请求来进行交互。<br>这也就一定会涉及到跨源 <code>AJAX</code> 的问题。</p>
+<p>说到『跨源』，首先得了解『同源政策（<a href="https://en.wikipedia.org/wiki/Same-origin_policy" target="_blank" rel="noopener">same-origin policy</a>）』。<br>同源政策是浏览器安全的基石。详见：<a href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html" target="_blank" rel="noopener">浏览器同源政策及其规避方法</a>    </p>
+<p><code>CORS</code> 是跨源资源分享（Cross-Origin Resource Sharing）的缩写。它是 <code>W3C</code> 标准，是跨源 <code>AJAX</code> 请求的根本解决方法。相比 <code>JSONP</code> 只能发 <code>GET</code> 请求， <code>CORS</code> 允许任何类型的请求。详见：<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">跨域资源共享 CORS 详解</a>    </p>
+<p>本文主要解决，在 Routing Controllers Framework 中配置 CORS</p>
+<a id="more"></a>
+<h1 id="配置-CORS-之前的返回"><a href="#配置-CORS-之前的返回" class="headerlink" title="配置 CORS 之前的返回"></a>配置 CORS 之前的返回</h1><p><img src="/images/routing-controllers-framework-cors/before_cors.jpg" alt="before"></p>
+<h1 id="Routing-Controllers-框架配置-CORS"><a href="#Routing-Controllers-框架配置-CORS" class="headerlink" title="Routing Controllers 框架配置 CORS"></a>Routing Controllers 框架配置 CORS</h1><p>参考：<a href="https://github.com/typestack/routing-controllers#enable-cors" target="_blank" rel="noopener">【routing-controllers】enable-cors</a>    </p>
+<h2 id="安装-cors"><a href="#安装-cors" class="headerlink" title="安装 cors"></a>安装 cors</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install cors --save</span><br></pre></td></tr></table></figure>
+<h2 id="在-app-ts-中添加配置"><a href="#在-app-ts-中添加配置" class="headerlink" title="在 app.ts 中添加配置"></a>在 app.ts 中添加配置</h2><blockquote>
+<p>简单配置或者详细配置二选一</p>
+</blockquote>
+<p><em>简单的配置</em><br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"reflect-metadata"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;createExpressServer&#125; <span class="keyword">from</span> <span class="string">"routing-controllers"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;UserController&#125; <span class="keyword">from</span> <span class="string">"./UserController"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = createExpressServer(&#123;</span><br><span class="line">    <span class="comment">// 简单的配置，直接把cors设置为true</span></span><br><span class="line">    cors: <span class="literal">true</span>,</span><br><span class="line">    controllers: [UserController]</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure></p>
+<p><em>详细的配置</em><br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"reflect-metadata"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;createExpressServer&#125; <span class="keyword">from</span> <span class="string">"routing-controllers"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;UserController&#125; <span class="keyword">from</span> <span class="string">"./UserController"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = createExpressServer(&#123;</span><br><span class="line">    cors: &#123;</span><br><span class="line">        <span class="comment">// options from cors documentation</span></span><br><span class="line">    &#125;,</span><br><span class="line">    controllers: [UserController]</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>options请参考：<a href="https://github.com/expressjs/cors#configuration-options" target="_blank" rel="noopener">【expressjs】cors configration-oprions</a>    </p>
+</blockquote>
+<h1 id="配置-CORS-之后的返回"><a href="#配置-CORS-之后的返回" class="headerlink" title="配置 CORS 之后的返回"></a>配置 CORS 之后的返回</h1><p><img src="/images/routing-controllers-framework-cors/after_cors.jpg" alt="after"></p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>注意：需要安装 cors 依赖。否则会报错：找不到模块</p>
+<p><img src="/images/routing-controllers-framework-cors/cannot_find_module_cors.jpg" alt="cannot_find_module_cors"></p>
+<blockquote>
+<p>解决：cnpm install cors</p>
+</blockquote>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html" target="_blank" rel="noopener">【阮一峰的网络日志】浏览器同源政策及其规避方法</a><br><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">【阮一峰的网络日志】跨域资源共享 CORS 详解</a><br><a href="https://github.com/typestack/routing-controllers#enable-cors" target="_blank" rel="noopener">【routing-controllers】enable-cors</a><br><a href="https://github.com/expressjs/cors#configuration-options" target="_blank" rel="noopener">【expressjs】cors configration-oprions</a><br><a href=""></a>    </p>
 
       
     </div>
@@ -396,7 +422,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://xiaochutian.github.io/2016/05/29/sample/" title="Routing Controllers Framework 项目初始化">http://xiaochutian.github.io/2016/05/29/sample/</a>
+    <a href="http://xiaochutian.github.io/2018/06/01/routing-controllers-framework-cors/" title="Routing Controllers Framework(二) 解决跨域（CORS）">http://xiaochutian.github.io/2018/06/01/routing-controllers-framework-cors/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -413,6 +439,8 @@
           
             <a href="/tags/routing-controllers/" rel="tag"># routing-controllers</a>
           
+            <a href="/tags/CORS/" rel="tag"># CORS</a>
+          
         </div>
       
 
@@ -424,15 +452,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/06/01/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/04/blog-migration-to-hexo/" rel="prev" title="博客迁移，Jekyll到Hexo">
-                博客迁移，Jekyll到Hexo <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -578,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-CORS-之前的返回"><span class="nav-number">2.</span> <span class="nav-text">配置 CORS 之前的返回</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Routing-Controllers-框架配置-CORS"><span class="nav-number">3.</span> <span class="nav-text">Routing Controllers 框架配置 CORS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-cors"><span class="nav-number">3.1.</span> <span class="nav-text">安装 cors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-app-ts-中添加配置"><span class="nav-number">3.2.</span> <span class="nav-text">在 app.ts 中添加配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-CORS-之后的返回"><span class="nav-number">4.</span> <span class="nav-text">配置 CORS 之后的返回</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">5.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -748,9 +776,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://xiaochutian.github.io/2016/05/29/sample/';
-          this.page.identifier = '2016/05/29/sample/';
-          this.page.title = 'Routing Controllers Framework 项目初始化';
+          this.page.url = 'http://xiaochutian.github.io/2018/06/01/routing-controllers-framework-cors/';
+          this.page.identifier = '2018/06/01/routing-controllers-framework-cors/';
+          this.page.title = 'Routing Controllers Framework(二) 解决跨域（CORS）';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://xiaochutian.disqus.com/embed.js';
